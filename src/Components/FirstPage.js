@@ -3,7 +3,9 @@ import './FirstPage.css'
 
 function FirstPage() {
   return (
-    <div>FirstPage</div>
+    <div className='firstpage'>
+        <img src='firstPage-thumbnail.png' alt='firstPage-thumbnail' className='firstpage-thumbnail'/>
+    </div>
   )
 }
 
