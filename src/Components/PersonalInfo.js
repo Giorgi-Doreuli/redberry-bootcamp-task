@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react'
+import {Link} from 'react-router-dom'
 import './PersonalInfo.css'
+import {IoIosArrowBack} from 'react-icons/io'
 
 function PersonalInfo() {
 
@@ -28,8 +30,15 @@ useEffect(() =>{
 
   return (
     <div className='personalInfo'>
+        <div className='prev-page'>
+            <Link to='/'>
+                <div className='arrow-ellipse'>
+                    <IoIosArrowBack />
+                </div>     
+            </Link>
+        </div>
         <div className='personalInfo-headers'>
-            <p className='header-1'>თანამშრომლის ინფო</p>
+            <p className='header-1'><span className='header-1-span'>თანამშრომლის ინფო</span></p>
             <p className='header-2'>ლეპტოპის მახასიათებლები</p>
         </div>
         <div className='personalInfo-box'>
@@ -70,7 +79,23 @@ useEffect(() =>{
                         ))}
                     </select>
                 </div>
+                <div className='email'>
+                    <h5 className='h5-email'>მეილი</h5>
+                    <input  type="email" placeholder='grish666@redberry.ge' className='email-input'
+                    required />
+                </div>
+                <div className='phone'>
+                    <h5 className='h5-phone'>ტელეფონი</h5>
+                    <input  type="text" placeholder='+995 598 00 07 01' className='phone-input'
+                    required />
+                </div>
+                <div className='next-page'>
+                    <Link to='/laptopInfo' className='next-page-link'>შემდეგი</Link>
+                </div>
             </div>
+        </div>
+        <div className='redberry-logo'>
+            <img src='redberry-logo.png' alt='redberry-logo' className='redberry-img'/>
         </div>
     </div>
   )

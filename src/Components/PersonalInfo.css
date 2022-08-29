@@ -5,13 +5,39 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 30px;
-    gap: 30px;
+    gap: 13px;
     box-sizing: border-box;
 }
 
 p{
     margin: 0;
+}
+
+.prev-page{
+    width: 100%;
+}
+
+.arrow-ellipse{
+    background-color: #D9D9D9;
+    height: 34px;
+    width: 34px;
+    border-Radius: 17px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 20px;
+    left: 30px;
+}
+
+.header-1, .header-2{
+    font-weight: 700;
+}
+
+.header-1-span{
+    display: inline-block;
+    border-bottom: 2px solid black;
+    padding-bottom: 10px;
 }
 
 .personalInfo-headers{
@@ -21,15 +47,16 @@ p{
 
 .personalInfo-box{
     background-color: #fff;
-    width: 70%;
-    height: 80%;
+    width: 65%;
     display: flex;
     justify-content: center;
 }
 
 .personalInfo-survey{
-    width: 60%;
-    padding-top: 40px;
+    width: 70%;
+    height: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
     display: flex;
     flex-direction: column;
     gap: 40px;
@@ -42,16 +69,22 @@ p{
     flex: 1 0 20%;
 }
 
+.email, .phone{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
 .name-username{
     display: flex;
     gap: 40px;
 }
 
-.h5-name, .h5-username{
+.h5-name, .h5-username, .h5-email, .h5-phone{
     margin: 0;
 }
 
-.name-input, .username-input{
+.name-input, .username-input, .email-input, .phone-input{
     padding: 10px 5px;
     outline: none;
 }
@@ -69,8 +102,29 @@ input{
     border-radius: 8px;
     border: none;
     border-right: 24px solid transparent;
+    font-weight: 700;
 }
 
 select:focus{
     outline: none;
+}
+
+.next-page{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.next-page-link{
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    background-color: #62A1EB;
+    color: #fff;
+    border-radius: 8px;
+    padding: 18px 30px 18px 30px;
+}
+
+.redberry-img{
+    height: 60px;
+    width:  60px;
 }
