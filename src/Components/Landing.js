@@ -8,8 +8,8 @@ function Landing() {
         <h2 className='Landing-heading'>Redberry</h2>
         <img src='Landing-thumbnail.png' alt='Landing-thumbnail' className='Landing-thumbnail'/>
         <div className='Landing-buttons'>
-          <Link to='/personalInfo'>ჩანაწერის დამატება</Link>
-          <Link to='/list'>ჩანაწერების სია</Link>
+          <Link to='/personalInfo' className='personalInfo-link'>ჩანაწერის დამატება</Link>
+          <Link to='/list' className='list-link'>ჩანაწერების სია</Link>
         </div>
     </div>
   )
