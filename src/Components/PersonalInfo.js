@@ -2,11 +2,38 @@ import React, {useState, useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import './PersonalInfo.css'
 import {IoIosArrowBack} from 'react-icons/io'
+import {useNavigate} from "react-router-dom"
 
 function PersonalInfo() {
 
 const [teams, setTeams] = useState([]);
 const [positions, setPositions] = useState([]);
+const [name, setName] = useState('');
+const [userName, setUserName] = useState('');
+const [teamsSelect, setTeamsSelect] = useState('');
+const [positionsSelect, setPositionsSelect] = useState('');
+const [email, setEmail] = useState('');
+const [phone, setPhone] = useState('');
+const [validPhone, setValidPhone] = useState(false);
+const [validEmail, setValidEmail] = useState(false);
+const [validPositionsSelect, setValidPositionsSelect] = useState(false);
+const [validTeamsSelect, setValidTeamsSelect] = useState(false);
+const [validName, setValidname] = useState(false);
+const [validUserName, setValidUserName] = useState(false);
+const [nameError, setNameError] = useState('მინიმუმ 2 სიმბოლო, ქართული ასოები');
+const [userNameError, setUserNameError] = useState('მინიმუმ 2 სიმბოლო, ქართული ასოები');
+const emailError = 'უნდა მთავრდებოდეს @redberry.ge-თი';
+const phoneError = 'უნდა აკმაყოფილებდეს ქართული მობ-ნომრის ფორმატს';
+const navigate = useNavigate();
+let nameCounter = 0;
+let userNameCounter = 0;
+const alphabet = ['ა', 'ბ', 'გ', 'დ', 'ე', 'ვ',
+                'ზ', 'თ', 'ი', 'კ', 'ლ', 'მ', 
+                'ნ', 'ო', 'პ', 'ჟ', 'რ', 'ს', 
+                'ტ', 'უ', 'ფ', 'ქ', 'ღ', 'ყ', 
+                'შ', 'ჩ', 'ც', 'ძ', 'წ', 'ჭ',
+                'ხ', 'ჯ', 'ჰ' ];
+
 
 useEffect(() =>{
     const getTeams = async () => {
@@ -28,6 +55,90 @@ useEffect(() =>{
     getPositions();
 }, [])
 
+const validateTeamsSelect = () => {
+    if(teamsSelect === '') {
+        setValidTeamsSelect(true);
+    }else {
+        setValidTeamsSelect(false);
+    }
+}
+
+const validatePositionsSelect = () => {
+    if(positionsSelect === '') {
+        setValidPositionsSelect(true);
+    }else {
+        setValidPositionsSelect(false);
+    }
+}
+
+const validateName = (checkText) => {
+    for(let i=0; i < checkText.length; i++) {
+        if(alphabet.includes(checkText[i])){
+            nameCounter++;
+        }
+    }
+
+    if(nameCounter !== checkText.length || checkText.length < 2){
+        setValidname(false);
+        setNameError('გამოიყენე ქართული ასოები');
+    }else{
+        setValidname(true);
+        setNameError('მინიმუმ 2 სიმბოლო, ქართული ასოები');
+    }
+    nameCounter=0;
+}
+
+const validateUserName = (checkText) => {
+    for(let i=0; i < checkText.length; i++) {
+        if(alphabet.includes(checkText[i])){
+            userNameCounter++;
+        }
+    }
+
+    if(userNameCounter !== checkText.length || checkText.length < 2){
+        setValidUserName(false);
+        setUserNameError('გამოიყენე ქართული ასოები');
+    }else{
+        setValidUserName(true);
+        setUserNameError('მინიმუმ 2 სიმბოლო, ქართული ასოები');
+    }
+    userNameCounter=0;
+}
+
+const validateEmail = (checkText) => {
+    const regexpEmail = /^[\w-.]+@redberry.ge/g;
+    if(checkText === email){
+      if (regexpEmail.exec(checkText) !== null) {
+        setValidEmail(false);
+          } else {
+                setValidEmail(true);
+          }
+    }
+}
+
+const validatePhone = (checkText) => {
+    const regexpPhone = /^\+(995)[\s](5)\d{2}[\s](\d{2}[\s]){2}(\d{2})$/;
+    if(checkText === phone){
+      if (regexpPhone.exec(checkText) !== null) {
+        setValidPhone(false);
+          } else {
+                  setValidPhone(true);
+          }
+    }
+}
+
+const nextPage = () => {
+    validateName(name);
+    validateUserName(userName);
+    validateTeamsSelect();
+    validatePositionsSelect();
+    validateEmail(email);
+    validatePhone(phone);
+    if(validName && validUserName && !validTeamsSelect && !validPositionsSelect && !validEmail && !validPhone) {
+        navigate('/laptopInfo');
+    }
+}
+
   return (
     <div className='personalInfo'>
         <div className='prev-page'>
@@ -44,19 +155,30 @@ useEffect(() =>{
         <div className='personalInfo-box'>
             <div className='personalInfo-survey'>
                 <div className='name-username'>
-                    <div className='name'>
+                    <div className='name' style={{color: nameError === 'გამოიყენე ქართული ასოები' ? 'red' : ''}}>
                         <h5 className='h5-name'>სახელი</h5>
                         <input  type="text" placeholder='გრიშა' className='name-input'
+                        onChange={(event) => setName(event.target.value)} value = {name}
+                        onBlur={() => validateName(name)}
+                        style={{borderColor: nameError === 'გამოიყენე ქართული ასოები' ? 'red' : ''}}
                         required />
+                        <p className='error'>{nameError}</p>
                     </div>
-                    <div className='username'>
+                    <div className='username' style={{color: userNameError === 'გამოიყენე ქართული ასოები' ? 'red' : ''}}>
                         <h5 className='h5-username'>გვარი</h5>
                         <input  type="text" placeholder='ბაგრატიონი' className='username-input'
+                        onChange={(event) => setUserName(event.target.value)} value = {userName}
+                        onBlur={() => validateUserName(userName)}
+                        style={{borderColor: userNameError === 'გამოიყენე ქართული ასოები' ? 'red' : ''}}
                         required />
+                        <p className='error'>{userNameError}</p>
                     </div>
                 </div>
                 <div className='teams'>   
-                    <select defaultValue={'DEFAULT'} className='teams-select'>
+                    <select defaultValue={'DEFAULT'} className='teams-select' id='teams-select' 
+                            onChange={e => setTeamsSelect(e.target.value)}
+                            onBlur={() => validateTeamsSelect()}
+                            style={{border: validTeamsSelect ?'2px solid red' : ''}} >
                             <option value="DEFAULT" disabled>თიმი</option>
                             {teams.map(item => (
                             <option
@@ -68,7 +190,10 @@ useEffect(() =>{
                     </select>
                 </div>
                 <div className='positions'>   
-                    <select defaultValue={'DEFAULT'} className='positions-select'>
+                    <select defaultValue={'DEFAULT'} className='positions-select'
+                            onChange={e => setPositionsSelect(e.target.value)}
+                            onBlur={() => validatePositionsSelect()}
+                            style={{border: validPositionsSelect ? '2px solid red': ''}} >
                             <option value="DEFAULT" disabled>პოზიცია</option>
                             {positions.map(item => (
                             <option
@@ -79,18 +204,26 @@ useEffect(() =>{
                         ))}
                     </select>
                 </div>
-                <div className='email'>
+                <div className='email' style={{color: validEmail ? 'red' : ''}}>
                     <h5 className='h5-email'>მეილი</h5>
                     <input  type="email" placeholder='grish666@redberry.ge' className='email-input'
+                    onChange={(event) => setEmail(event.target.value)} value = {email}
+                    onBlur={() => validateEmail(email)}
+                    style={{borderColor: validEmail ? 'red' : ''}}
                     required />
+                    <p className='error'>{emailError}</p>
                 </div>
-                <div className='phone'>
+                <div className='phone' style={{color: validPhone ? 'red' : ''}}>
                     <h5 className='h5-phone'>ტელეფონი</h5>
                     <input  type="text" placeholder='+995 598 00 07 01' className='phone-input'
+                    onChange={(event) => setPhone(event.target.value)} value = {phone}
+                    onBlur={() => validatePhone(phone)}
+                    style={{borderColor: validPhone ? 'red' : ''}}
                     required />
+                    <p className='error'>{phoneError}</p>
                 </div>
                 <div className='next-page'>
-                    <Link to='/laptopInfo' className='next-page-link'>შემდეგი</Link>
+                    <button onClick={() => nextPage()} className='next-page-btn'>შემდეგი</button>
                 </div>
             </div>
         </div>
