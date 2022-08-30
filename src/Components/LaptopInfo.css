@@ -108,3 +108,47 @@
     border: none;
     cursor: pointer;
 }
+
+.laptop-name-brand{
+    display: flex;
+    align-items: flex-end;
+    gap: 40px;
+}
+
+.laptop-info-header{
+    margin: 0;
+}
+
+.laptop-name, .laptop-brands{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1 0 20%;
+}
+
+.laptop-info-input{
+    padding: 10px 5px;
+    outline: none;
+}
+
+.brands-select, .cpus-select{
+    padding: 13px 24px;
+    background-color: #EBEBEB;
+    border-radius: 8px;
+    border: none;
+    border-right: 24px solid transparent;
+    font-weight: 700;
+}
+
+.laptop-specs{
+    display: flex;
+    align-items: flex-end;
+    gap: 40px;
+}
+
+.laptop-cpus, .cpu-core, .cpu-thread{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1 0 20%;
+}
