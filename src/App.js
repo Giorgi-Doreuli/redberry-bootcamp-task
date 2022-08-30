@@ -5,12 +5,13 @@ import PersonalInfo from './Components/PersonalInfo'
 import LaptopInfo from './Components/LaptopInfo';
 
 function App() {
+
   return (
     <Router>
       <div className="App">
         <Routes>
             <Route exact path='/' element={<Landing />} />
-            <Route path='/personalInfo' element={<PersonalInfo />}/>
+            <Route path='/personalInfo' element={<PersonalInfo/>}/>
             <Route path='/laptopInfo' element={<LaptopInfo />}/>
         </Routes>
       </div>
