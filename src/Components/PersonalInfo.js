@@ -157,8 +157,8 @@ const nextPage = () => {
             <div className='personalInfo-survey'>
                 <div className='name-lastName'>
                     <div className='name' style={{color: nameError === 'გამოიყენე ქართული ასოები' ? 'red' : ''}}>
-                        <h5 className='h5-name'>სახელი</h5>
-                        <input  type="text" placeholder='გრიშა' className='name-input'
+                        <h5 className='personalInfo-header'>სახელი</h5>
+                        <input  type="text" placeholder='გრიშა' className='personalInfo-input'
                         onChange={(event) => setName(event.target.value)} value = {name}
                         onBlur={() => validateName(name)}
                         style={{borderColor: nameError === 'გამოიყენე ქართული ასოები' ? 'red' : ''}}
@@ -166,8 +166,8 @@ const nextPage = () => {
                         <p className='error'>{nameError}</p>
                     </div>
                     <div className='lastName' style={{color: lastNameError === 'გამოიყენე ქართული ასოები' ? 'red' : ''}}>
-                        <h5 className='h5-lastName'>გვარი</h5>
-                        <input  type="text" placeholder='ბაგრატიონი' className='lastName-input'
+                        <h5 className='personalInfo-header'>გვარი</h5>
+                        <input  type="text" placeholder='ბაგრატიონი' className='personalInfo-input'
                         onChange={(event) => setlastName(event.target.value)} value = {lastName}
                         onBlur={() => validatelastName(lastName)}
                         style={{borderColor: lastNameError === 'გამოიყენე ქართული ასოები' ? 'red' : ''}}
@@ -206,8 +206,8 @@ const nextPage = () => {
                     </select>
                 </div>
                 <div className='email' style={{color: validEmail ? 'red' : ''}}>
-                    <h5 className='h5-email'>მეილი</h5>
-                    <input  type="email" placeholder='grish666@redberry.ge' className='email-input'
+                    <h5 className='personalInfo-header'>მეილი</h5>
+                    <input  type="email" placeholder='grish666@redberry.ge' className='personalInfo-input'
                     onChange={(event) => setEmail(event.target.value)} value = {email}
                     onBlur={() => validateEmail(email)}
                     style={{borderColor: validEmail ? 'red' : ''}}
@@ -215,8 +215,8 @@ const nextPage = () => {
                     <p className='error'>{emailError}</p>
                 </div>
                 <div className='phone' style={{color: validPhone ? 'red' : ''}}>
-                    <h5 className='h5-phone'>ტელეფონი</h5>
-                    <input  type="text" placeholder='+995 598 00 07 01' className='phone-input'
+                    <h5 className='personalInfo-header'>ტელეფონი</h5>
+                    <input  type="text" placeholder='+995 598 00 07 01' className='personalInfo-input'
                     onChange={(event) => setPhone(event.target.value)} value = {phone}
                     onBlur={() => validatePhone(phone)}
                     style={{borderColor: validPhone ? 'red' : ''}}
