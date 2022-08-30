@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import {Link} from 'react-router-dom'
+import SessionStorage from './SessionStorage'
 import './PersonalInfo.css'
 import {IoIosArrowBack} from 'react-icons/io'
 import {useNavigate} from "react-router-dom"
@@ -8,25 +9,25 @@ function PersonalInfo() {
 
 const [teams, setTeams] = useState([]);
 const [positions, setPositions] = useState([]);
-const [name, setName] = useState('');
-const [userName, setUserName] = useState('');
-const [teamsSelect, setTeamsSelect] = useState('');
-const [positionsSelect, setPositionsSelect] = useState('');
-const [email, setEmail] = useState('');
-const [phone, setPhone] = useState('');
+const [name, setName] = SessionStorage('name', '');
+const [lastName, setlastName] = SessionStorage('lastName', '');
+const [teamsSelect, setTeamsSelect] = SessionStorage('teamsSelect', '');
+const [positionsSelect, setPositionsSelect] = SessionStorage('positionsSelect', '');
+const [email, setEmail] = SessionStorage('email', '');
+const [phone, setPhone] = SessionStorage('phone', '');
 const [validPhone, setValidPhone] = useState(false);
 const [validEmail, setValidEmail] = useState(false);
 const [validPositionsSelect, setValidPositionsSelect] = useState(false);
 const [validTeamsSelect, setValidTeamsSelect] = useState(false);
 const [validName, setValidname] = useState(false);
-const [validUserName, setValidUserName] = useState(false);
+const [validlastName, setValidlastName] = useState(false);
 const [nameError, setNameError] = useState('მინიმუმ 2 სიმბოლო, ქართული ასოები');
-const [userNameError, setUserNameError] = useState('მინიმუმ 2 სიმბოლო, ქართული ასოები');
+const [lastNameError, setlastNameError] = useState('მინიმუმ 2 სიმბოლო, ქართული ასოები');
 const emailError = 'უნდა მთავრდებოდეს @redberry.ge-თი';
 const phoneError = 'უნდა აკმაყოფილებდეს ქართული მობ-ნომრის ფორმატს';
 const navigate = useNavigate();
 let nameCounter = 0;
-let userNameCounter = 0;
+let lastNameCounter = 0;
 const alphabet = ['ა', 'ბ', 'გ', 'დ', 'ე', 'ვ',
                 'ზ', 'თ', 'ი', 'კ', 'ლ', 'მ', 
                 'ნ', 'ო', 'პ', 'ჟ', 'რ', 'ს', 
@@ -88,21 +89,21 @@ const validateName = (checkText) => {
     nameCounter=0;
 }
 
-const validateUserName = (checkText) => {
+const validatelastName = (checkText) => {
     for(let i=0; i < checkText.length; i++) {
         if(alphabet.includes(checkText[i])){
-            userNameCounter++;
+            lastNameCounter++;
         }
     }
 
-    if(userNameCounter !== checkText.length || checkText.length < 2){
-        setValidUserName(false);
-        setUserNameError('გამოიყენე ქართული ასოები');
+    if(lastNameCounter !== checkText.length || checkText.length < 2){
+        setValidlastName(false);
+        setlastNameError('გამოიყენე ქართული ასოები');
     }else{
-        setValidUserName(true);
-        setUserNameError('მინიმუმ 2 სიმბოლო, ქართული ასოები');
+        setValidlastName(true);
+        setlastNameError('მინიმუმ 2 სიმბოლო, ქართული ასოები');
     }
-    userNameCounter=0;
+    lastNameCounter=0;
 }
 
 const validateEmail = (checkText) => {
@@ -129,12 +130,12 @@ const validatePhone = (checkText) => {
 
 const nextPage = () => {
     validateName(name);
-    validateUserName(userName);
+    validatelastName(lastName);
     validateTeamsSelect();
     validatePositionsSelect();
     validateEmail(email);
     validatePhone(phone);
-    if(validName && validUserName && !validTeamsSelect && !validPositionsSelect && !validEmail && !validPhone) {
+    if(validName && validlastName && !validTeamsSelect && !validPositionsSelect && !validEmail && !validPhone) {
         navigate('/laptopInfo');
     }
 }
@@ -154,7 +155,7 @@ const nextPage = () => {
         </div>
         <div className='personalInfo-box'>
             <div className='personalInfo-survey'>
-                <div className='name-username'>
+                <div className='name-lastName'>
                     <div className='name' style={{color: nameError === 'გამოიყენე ქართული ასოები' ? 'red' : ''}}>
                         <h5 className='h5-name'>სახელი</h5>
                         <input  type="text" placeholder='გრიშა' className='name-input'
@@ -164,14 +165,14 @@ const nextPage = () => {
                         required />
                         <p className='error'>{nameError}</p>
                     </div>
-                    <div className='username' style={{color: userNameError === 'გამოიყენე ქართული ასოები' ? 'red' : ''}}>
-                        <h5 className='h5-username'>გვარი</h5>
-                        <input  type="text" placeholder='ბაგრატიონი' className='username-input'
-                        onChange={(event) => setUserName(event.target.value)} value = {userName}
-                        onBlur={() => validateUserName(userName)}
-                        style={{borderColor: userNameError === 'გამოიყენე ქართული ასოები' ? 'red' : ''}}
+                    <div className='lastName' style={{color: lastNameError === 'გამოიყენე ქართული ასოები' ? 'red' : ''}}>
+                        <h5 className='h5-lastName'>გვარი</h5>
+                        <input  type="text" placeholder='ბაგრატიონი' className='lastName-input'
+                        onChange={(event) => setlastName(event.target.value)} value = {lastName}
+                        onBlur={() => validatelastName(lastName)}
+                        style={{borderColor: lastNameError === 'გამოიყენე ქართული ასოები' ? 'red' : ''}}
                         required />
-                        <p className='error'>{userNameError}</p>
+                        <p className='error'>{lastNameError}</p>
                     </div>
                 </div>
                 <div className='teams'>   
