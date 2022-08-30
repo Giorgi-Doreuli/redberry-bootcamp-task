@@ -62,7 +62,7 @@ p{
     gap: 20px;
 }
 
-.name, .username{
+.name, .lastName{
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -75,16 +75,16 @@ p{
     gap: 5px;
 }
 
-.name-username{
+.name-lastName{
     display: flex;
     gap: 40px;
 }
 
-.h5-name, .h5-username, .h5-email, .h5-phone{
+.h5-name, .h5-lastName, .h5-email, .h5-phone{
     margin: 0;
 }
 
-.name-input, .username-input, .email-input, .phone-input{
+.name-input, .lastName-input, .email-input, .phone-input{
     padding: 10px 5px;
     outline: none;
 }
