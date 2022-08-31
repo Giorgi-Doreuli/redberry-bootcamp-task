@@ -14,11 +14,11 @@ function LaptopInfo() {
   const [laptopName, setLaptopName] = useState('');
   const [cpuCore, setCpuCore] = useState('');
   const [cpuThread, setCpuThread] = useState('');
+  const [memoryCapacity, setMemoryCapacity] = useState('');
   const laptopNameError = 'ლათინური ასოები, ციფრები, !@#$%^&*()_+= ';
-  const laptopBrandError = 'აირჩიეთ ბრენდი';
-  const laptopCpuError = 'აირჩიეთ CPU';
   const cpuCoreError = 'მხოლოდ ციფრები';
   const cpuThreadError = 'მხოლოდ ციფრები';
+  const memoryCapacityError = 'მხოლოდ ციფრები';
 
     const {getRootProps, getInputProps, open} = useDropzone({
 
@@ -114,10 +114,10 @@ function LaptopInfo() {
                     </option>
                     ))}
               </select>
-              <p className='error'>{laptopBrandError}</p>
             </div>
           </div>
-          <div className='laptop-specs'>
+          <div className='line'></div>
+          <div className='cpu-specs'>
             <div className='laptop-cpus'>
               <select defaultValue={'DEFAULT'} className='cpus-select' id='cpus-select' 
                 onChange={e => setCpusSelect(e.target.value)}>
@@ -130,7 +130,6 @@ function LaptopInfo() {
                 </option>
                 ))}
               </select>
-              <p className='error'>{laptopCpuError}</p>
             </div>
             <div className='cpu-core' >
               <h5 className='laptop-info-header'>CPU-ს ბირთვი</h5>
@@ -145,6 +144,28 @@ function LaptopInfo() {
               onChange={(event) => setCpuThread(event.target.value)} value = {cpuThread}
               required />
               <p className='error'>{cpuThreadError}</p>
+            </div>
+          </div>
+          <div className='memory-specs'>
+            <div className='memory-capacity' >
+              <h5 className='laptop-info-header'>ლეპტოპის RAM (GB)</h5>
+              <input  type="text" placeholder='16' className='laptop-info-input'
+              onChange={(event) => setMemoryCapacity(event.target.value)} value = {memoryCapacity}
+              required />
+              <p className='error'>{memoryCapacityError}</p>
+            </div>
+            <div className='memory-type'>
+              <h5 className='laptop-info-header'>მეხსიერების ტიპი</h5>
+              <div className='radio-buttons'>
+                <div className='ssd'>
+                  <input type="radio" id="SSD" value="SSD" name='memory-type' className='laptop-info-radios'/>
+                  <label for='SSD'>SSD</label>
+                </div>
+                <div className='hdd'>
+                  <input type="radio" id="HDD" value="HDD" name='memory-type' className='laptop-info-radios'/>
+                  <label for='HDD'>HDD</label>
+                </div>
+              </div>
             </div>
           </div>
         </div>
