@@ -5,25 +5,26 @@ import {useDropzone} from 'react-dropzone';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLariSign, faCircleCheck, faCircleExclamation} from '@fortawesome/free-solid-svg-icons';
 import {useNavigate} from "react-router-dom"
+import SessionStorage from './SessionStorage';
 import './LaptopInfo.css'
 
 function LaptopInfo() {
 
   const [brands, setBrands] = useState([]);
   const [cpus, setCpus] = useState([]);
-  const [brandsSelect, setBrandsSelect] = useState('DEFAULT');
-  const [cpusSelect, setCpusSelect] = useState('DEFAULT');
+  const [brandsSelect, setBrandsSelect] = SessionStorage('brandsSelect', 'DEFAULT');
+  const [cpusSelect, setCpusSelect] = SessionStorage('cpusSelect', 'DEFAULT');
   const [fileUrls, setfileUrls] = useState([]);
   const [fileNames, setFileNames] = useState([]);
   const [fileSize, setFileSize] = useState([]);
-  const [laptopName, setLaptopName] = useState('');
-  const [cpuCore, setCpuCore] = useState('');
-  const [cpuThread, setCpuThread] = useState('');
-  const [time, setTime] = useState('');
-  const [price, setPrice] = useState('');
-  const [memoryType, setMemoryType] = useState('');
-  const [memoryCapacity, setMemoryCapacity] = useState('');
-  const [condition, setCondition] = useState('');
+  const [laptopName, setLaptopName] = SessionStorage('laptopName', '');
+  const [cpuCore, setCpuCore] = SessionStorage('cpuCore', '');
+  const [cpuThread, setCpuThread] = SessionStorage('cpuThread', '');
+  const [time, setTime] = SessionStorage('time', '');
+  const [price, setPrice] = SessionStorage('price', '');
+  const [memoryType, setMemoryType] = SessionStorage('memoryType', '');
+  const [memoryCapacity, setMemoryCapacity] = SessionStorage('memoryCapacity', '');
+  const [condition, setCondition] = SessionStorage('condition', '');
   const [validImage, setValidImage] = useState(false);
   const [validLaptopName, setValidLaptopName] = useState(false);
   const [validLaptopBrand, setValidLaptopBrand] = useState(false);
@@ -218,6 +219,10 @@ const nextPage = () => {
   validateCondition(condition);
 }
 
+const prevPage = () => {
+  navigate('/personalInfo');
+}
+
 useEffect(() =>{
   if(validImage && validLaptopName && validLaptopBrand && validLaptopCpu
     && validCpuCore && validCpuThread && validMemoryCapacity && validMemoryType && validLaptopPrice && validCondition){
@@ -229,7 +234,7 @@ useEffect(() =>{
   return (
     <div className="laptopInfo">
       <div className='prev-page'>
-        <Link to='/'>
+        <Link to='/personalInfo'>
           <div className='arrow-ellipse'>
             <IoIosArrowBack />
           </div>     
@@ -293,11 +298,11 @@ useEffect(() =>{
               <p className='error'>{laptopNameText}</p>
             </div>
             <div className='laptop-brands'>
-              <select defaultValue={'DEFAULT'} className='brands-select' id='brands-select' 
+              <select value={brandsSelect} className='brands-select' id='brands-select' 
                 onChange={e => setBrandsSelect(e.target.value)}
                 onBlur={() => validateBrandSelect(brandsSelect)}
                 style={{border: laptopBrandSelected === 'false' ? '2px solid red' : ''}}>
-                  <option value="DEFAULT" disabled>ლეპტოპის ბრენდი</option>
+                  <option value="DEFAULT" disabled selected>ლეპტოპის ბრენდი</option>
                     {brands.map(item => (
                     <option
                     value={item.name}
@@ -311,11 +316,11 @@ useEffect(() =>{
           <div className='line'></div>
           <div className='cpu-specs'>
             <div className='laptop-cpus'>
-              <select defaultValue={'DEFAULT'} className='cpus-select' id='cpus-select' 
+              <select value={cpusSelect} className='cpus-select' id='cpus-select' 
                 onChange={e => setCpusSelect(e.target.value)}
                 onBlur={() => validateCpuSelect(cpusSelect)}
                 style={{border: laptopCpuSelected === 'false' ? '2px solid red' : ''}}>
-                <option value="DEFAULT" disabled>CPU</option>
+                <option value="DEFAULT" disabled selected>CPU</option>
                 {cpus.map(item => (
                 <option
                 value={item.name}
@@ -362,11 +367,13 @@ useEffect(() =>{
               <div className='memory-radio-buttons' onChange={(event) => setMemoryType(event.target.value)}
                                                     onBlur={() => validateMemoryType(memoryType)}>
                 <div className='ssd'>
-                  <input type="radio" id="SSD" value="SSD" name='memory-type' className='laptop-info-radios'/>
+                  <input type="radio" id="SSD" value="SSD" name='memory-type' 
+                        className='laptop-info-radios' checked={memoryType === 'SSD' ? 'true' : ''}/>
                   <label for='SSD'>SSD</label>
                 </div>
                 <div className='hdd'>
-                  <input type="radio" id="HDD" value="HDD" name='memory-type' className='laptop-info-radios'/>
+                  <input type="radio" id="HDD" value="HDD" name='memory-type' 
+                          className='laptop-info-radios' checked={memoryType === 'HDD' ? 'true' : ''}/>
                   <label for='HDD'>HDD</label>
                 </div>
               </div>
@@ -403,17 +410,20 @@ useEffect(() =>{
             <div className='condition-radio-buttons' onChange={(event) => setCondition(event.target.value)}
                                                     onBlur={() => validateCondition(condition)}>
               <div className='new'>
-                <input type="radio" id="new" value="new" name='laptop-condition' className='laptop-info-radios'/>
+                <input type="radio" id="new" value="new" name='laptop-condition' 
+                      className='laptop-info-radios' checked={condition === 'new' ? 'true' : ''}/>
                 <label for='new'>ახალი</label>
               </div>
               <div className='secondary'>
-                <input type="radio" id="secondary" value="secondary" name='laptop-condition' className='laptop-info-radios'/>
+                <input type="radio" id="secondary" value="secondary" name='laptop-condition' 
+                      className='laptop-info-radios' checked={condition === 'secondary' ? 'true' : ''}/>
                 <label for='secondary'>მეორადი</label>
               </div>
             </div>
           </div>
-          <div className='next-page'>
-            <button onClick={() => nextPage()} className='next-page-btn'>შემდეგი</button>
+          <div className='change-page'>
+            <p onClick={() => prevPage()} className='prev-page-btn'>უკან</p>
+            <button onClick={() => nextPage()} className='next-page-btn'>დამახსოვრება</button>
           </div>
         </div>
       </div>

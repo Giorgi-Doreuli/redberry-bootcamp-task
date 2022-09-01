@@ -271,4 +271,14 @@ input[type="radio"]:checked {
     top: 30px;
 }
 
+.change-page{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.prev-page-btn{
+    color: #62A1EB;
+    cursor: pointer;
+}
 
