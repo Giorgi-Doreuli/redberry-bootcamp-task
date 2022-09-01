@@ -7,12 +7,13 @@ import {useNavigate} from "react-router-dom"
 
 function PersonalInfo() {
 
+const [validEverything, setValidEverything] = useState(false);
 const [teams, setTeams] = useState([]);
 const [positions, setPositions] = useState([]);
 const [name, setName] = SessionStorage('name', '');
 const [lastName, setlastName] = SessionStorage('lastName', '');
-const [teamsSelect, setTeamsSelect] = SessionStorage('teamsSelect', '');
-const [positionsSelect, setPositionsSelect] = SessionStorage('positionsSelect', '');
+const [teamsSelect, setTeamsSelect] = SessionStorage('teamsSelect', 'DEFAULT');
+const [positionsSelect, setPositionsSelect] = SessionStorage('positionsSelect', 'DEFAULT');
 const [email, setEmail] = SessionStorage('email', '');
 const [phone, setPhone] = SessionStorage('phone', '');
 const [validPhone, setValidPhone] = useState(false);
@@ -23,8 +24,12 @@ const [validName, setValidname] = useState(false);
 const [validlastName, setValidlastName] = useState(false);
 const [nameError, setNameError] = useState('მინიმუმ 2 სიმბოლო, ქართული ასოები');
 const [lastNameError, setlastNameError] = useState('მინიმუმ 2 სიმბოლო, ქართული ასოები');
-const emailError = 'უნდა მთავრდებოდეს @redberry.ge-თი';
-const phoneError = 'უნდა აკმაყოფილებდეს ქართული მობ-ნომრის ფორმატს';
+const [teamsSelectError, setTeamsSelectError] = useState('true');
+const [positionsSelectError, setPositionsSelectError] = useState('true');
+const [emailError, setEmailError] = useState('true');
+const [phoneError, setPhoneError] = useState('true');
+const emailText = 'უნდა მთავრდებოდეს @redberry.ge-თი';
+const phoneText = 'უნდა აკმაყოფილებდეს ქართული მობ-ნომრის ფორმატს';
 const navigate = useNavigate();
 let nameCounter = 0;
 let lastNameCounter = 0;
@@ -56,19 +61,23 @@ useEffect(() =>{
     getPositions();
 }, [])
 
-const validateTeamsSelect = () => {
-    if(teamsSelect === '') {
-        setValidTeamsSelect(true);
-    }else {
+const validateTeamsSelect = (checkText) => {
+    if(checkText === 'DEFAULT') {
         setValidTeamsSelect(false);
+        setTeamsSelectError('false');
+    }else {
+        setValidTeamsSelect(true);
+        setTeamsSelectError('true');
     }
 }
 
-const validatePositionsSelect = () => {
-    if(positionsSelect === '') {
-        setValidPositionsSelect(true);
-    }else {
+const validatePositionsSelect = (checkText) => {
+    if(checkText === 'DEFAULT') {
         setValidPositionsSelect(false);
+        setPositionsSelectError('false');
+    }else {
+        setValidPositionsSelect(true);
+        setPositionsSelectError('true');
     }
 }
 
@@ -110,9 +119,11 @@ const validateEmail = (checkText) => {
     const regexpEmail = /^[\w-.]+@redberry.ge/g;
     if(checkText === email){
       if (regexpEmail.exec(checkText) !== null) {
-        setValidEmail(false);
+        setValidEmail(true);
+        setEmailError('true');
           } else {
-                setValidEmail(true);
+                setValidEmail(false);
+                setEmailError('false');
           }
     }
 }
@@ -121,9 +132,11 @@ const validatePhone = (checkText) => {
     const regexpPhone = /^\+(995)[\s](5)\d{2}[\s](\d{2}[\s]){2}(\d{2})$/;
     if(checkText === phone){
       if (regexpPhone.exec(checkText) !== null) {
-        setValidPhone(false);
+        setValidPhone(true);
+        setPhoneError('true');
           } else {
-                  setValidPhone(true);
+                  setValidPhone(false);
+                  setPhoneError('false');
           }
     }
 }
@@ -131,14 +144,22 @@ const validatePhone = (checkText) => {
 const nextPage = () => {
     validateName(name);
     validatelastName(lastName);
-    validateTeamsSelect();
-    validatePositionsSelect();
+    validateTeamsSelect(teamsSelect);
+    validatePositionsSelect(positionsSelect);
     validateEmail(email);
     validatePhone(phone);
-    if(validName && validlastName && !validTeamsSelect && !validPositionsSelect && !validEmail && !validPhone) {
+    setValidEverything(!validEverything);
+}
+
+const checkError = () => {
+    if(validName && validlastName && validTeamsSelect && validPositionsSelect && validEmail && validPhone) {
         navigate('/laptopInfo');
     }
-}
+}   
+
+useEffect(() =>{
+    checkError();
+}, [validEverything])
 
   return (
     <div className='personalInfo'>
@@ -176,10 +197,10 @@ const nextPage = () => {
                     </div>
                 </div>
                 <div className='teams'>   
-                    <select defaultValue={'DEFAULT'} className='teams-select' id='teams-select' 
+                    <select defaultValue={teamsSelect} className='teams-select' id='teams-select' 
                             onChange={e => setTeamsSelect(e.target.value)}
-                            onBlur={() => validateTeamsSelect()}
-                            style={{border: validTeamsSelect ?'2px solid red' : ''}} >
+                            onBlur={() => validateTeamsSelect(teamsSelect)}
+                            style={{border: teamsSelectError === 'false' ?'2px solid red' : ''}} >
                             <option value="DEFAULT" disabled>თიმი</option>
                             {teams.map(item => (
                             <option
@@ -193,8 +214,8 @@ const nextPage = () => {
                 <div className='positions'>   
                     <select defaultValue={'DEFAULT'} className='positions-select'
                             onChange={e => setPositionsSelect(e.target.value)}
-                            onBlur={() => validatePositionsSelect()}
-                            style={{border: validPositionsSelect ? '2px solid red': ''}} >
+                            onBlur={() => validatePositionsSelect(positionsSelect)}
+                            style={{border: positionsSelectError === 'false' ? '2px solid red': ''}} >
                             <option value="DEFAULT" disabled>პოზიცია</option>
                             {positions.map(item => (
                             <option
@@ -205,23 +226,23 @@ const nextPage = () => {
                         ))}
                     </select>
                 </div>
-                <div className='email' style={{color: validEmail ? 'red' : ''}}>
+                <div className='email' style={{color: emailError === 'false' ? 'red' : ''}}>
                     <h5 className='personalInfo-header'>მეილი</h5>
                     <input  type="email" placeholder='grish666@redberry.ge' className='personalInfo-input'
                     onChange={(event) => setEmail(event.target.value)} value = {email}
                     onBlur={() => validateEmail(email)}
-                    style={{borderColor: validEmail ? 'red' : ''}}
+                    style={{borderColor: emailError === 'false' ? 'red' : ''}}
                     required />
-                    <p className='error'>{emailError}</p>
+                    <p className='error'>{emailText}</p>
                 </div>
-                <div className='phone' style={{color: validPhone ? 'red' : ''}}>
+                <div className='phone' style={{color: phoneError === 'false' ? 'red' : ''}}>
                     <h5 className='personalInfo-header'>ტელეფონი</h5>
                     <input  type="text" placeholder='+995 598 00 07 01' className='personalInfo-input'
                     onChange={(event) => setPhone(event.target.value)} value = {phone}
                     onBlur={() => validatePhone(phone)}
-                    style={{borderColor: validPhone ? 'red' : ''}}
+                    style={{borderColor: phoneError === 'false' ? 'red' : ''}}
                     required />
-                    <p className='error'>{phoneError}</p>
+                    <p className='error'>{phoneText}</p>
                 </div>
                 <div className='next-page'>
                     <button onClick={() => nextPage()} className='next-page-btn'>შემდეგი</button>

@@ -125,6 +125,10 @@ select:focus{
     border: none;
 }
 
+.redberry-logo{
+    height: 100%;
+}
+
 .redberry-img{
     height: 60px;
     width:  60px;
