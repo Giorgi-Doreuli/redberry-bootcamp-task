@@ -161,6 +161,7 @@ useEffect(() =>{
     checkError();
 }, [validEverything])
 
+
   return (
     <div className='personalInfo'>
         <div className='prev-page'>
@@ -197,11 +198,12 @@ useEffect(() =>{
                     </div>
                 </div>
                 <div className='teams'>   
-                    <select defaultValue={teamsSelect} className='teams-select' id='teams-select' 
+                    <select value={teamsSelect}
+                            className='teams-select' id='teams-select' 
                             onChange={e => setTeamsSelect(e.target.value)}
                             onBlur={() => validateTeamsSelect(teamsSelect)}
                             style={{border: teamsSelectError === 'false' ?'2px solid red' : ''}} >
-                            <option value="DEFAULT" disabled>თიმი</option>
+                            <option value="DEFAULT" disabled selected>თიმი</option>
                             {teams.map(item => (
                             <option
                             value={item.name}
@@ -212,11 +214,11 @@ useEffect(() =>{
                     </select>
                 </div>
                 <div className='positions'>   
-                    <select defaultValue={'DEFAULT'} className='positions-select'
+                    <select value={positionsSelect} className='positions-select'
                             onChange={e => setPositionsSelect(e.target.value)}
                             onBlur={() => validatePositionsSelect(positionsSelect)}
                             style={{border: positionsSelectError === 'false' ? '2px solid red': ''}} >
-                            <option value="DEFAULT" disabled>პოზიცია</option>
+                            <option value="DEFAULT" disabled selected>პოზიცია</option>
                             {positions.map(item => (
                             <option
                             value={item.name}
