@@ -9,7 +9,7 @@ function Landing() {
         <img src='Landing-thumbnail.png' alt='Landing-thumbnail' className='Landing-thumbnail'/>
         <div className='Landing-buttons'>
           <Link to='/personalInfo' className='personalInfo-link'>ჩანაწერის დამატება</Link>
-          <Link to='/list' className='list-link'>ჩანაწერების სია</Link>
+          <Link to='/laptopList' className='list-link'>ჩანაწერების სია</Link>
         </div>
     </div>
   )
