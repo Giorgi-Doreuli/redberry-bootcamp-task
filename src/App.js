@@ -4,8 +4,12 @@ import Landing from './Components/Landing';
 import PersonalInfo from './Components/PersonalInfo'
 import LaptopInfo from './Components/LaptopInfo';
 import SubmitPage from './Components/SubmitPage';
+import LaptopList from './Components/LaptopList';
+import {useState} from 'react'
 
 function App() {
+
+const [image, setimage] = useState('');
 
   return (
     <Router>
@@ -13,8 +17,9 @@ function App() {
         <Routes>
             <Route exact path='/' element={<Landing />} />
             <Route path='/personalInfo' element={<PersonalInfo/>}/>
-            <Route path='/laptopInfo' element={<LaptopInfo />}/>
-            <Route path='/submitPage' element={<SubmitPage />}/>
+            <Route path='/laptopInfo' element={<LaptopInfo setimage={setimage}/>}/>
+            <Route path='/submitPage' element={<SubmitPage image={image}/>}/>
+            <Route path='/laptopList' element={<LaptopList />}/>
         </Routes>
       </div>
     </Router>
