@@ -173,7 +173,7 @@ useEffect(() =>{
         </div>
         <div className='personalInfo-headers'>
             <p className='header-1'><span className='header-1-span'>თანამშრომლის ინფო</span></p>
-            <p className='header-2'>ლეპტოპის მახასიათებლები</p>
+            <p className='header-2' onClick={() => nextPage()}>ლეპტოპის მახასიათებლები</p>
         </div>
         <div className='personalInfo-box'>
             <div className='personalInfo-survey'>
