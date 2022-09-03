@@ -25,9 +25,9 @@ const postData = () => {
   formData.append("laptop_ram", JSON.parse(sessionStorage.getItem('memoryCapacity')));
   formData.append("laptop_hard_drive_type", JSON.parse(sessionStorage.getItem('memoryType')));
   formData.append("laptop_state",  JSON.parse(sessionStorage.getItem('condition')));
-  formData.append("laptop_purchase_date", "");
+  formData.append("laptop_purchase_date", JSON.parse(sessionStorage.getItem('time')));
   formData.append("laptop_price", JSON.parse(sessionStorage.getItem('price')));
-  formData.append("token", "6f46a4b154a5ee8a57ad7445ed09004a");
+  formData.append("token", "73426823c5b4d01ed260155425fb5b64");
   const config = {     
     headers: { 'content-type': 'multipart/form-data' }
 }
@@ -43,7 +43,7 @@ const postData = () => {
 }
 
 const clearSessionStorage = () =>{
-  
+  sessionStorage.clear();
 }
 
   return (
