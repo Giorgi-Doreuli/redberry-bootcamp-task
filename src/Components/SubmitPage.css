@@ -1,0 +1,29 @@
+.submitPage{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.submit-info{
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    background-color: #62A1EB;
+    color: #fff;
+    border-radius: 8px;
+    padding: 18px 30px 18px 30px;
+    border: none;
+}
+
+.go-to-landing{
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    background-color: #fff;
+    border: none;
+    color: #62A1EB;
+}
