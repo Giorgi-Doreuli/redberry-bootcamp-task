@@ -167,8 +167,6 @@ const filterPositions = (value) => {
             return el.team_id === JSON.parse(value)
         });
         setFilteredPositions(newArray);
-        console.log(value);
-        console.log(newArray);
 }
 
 
