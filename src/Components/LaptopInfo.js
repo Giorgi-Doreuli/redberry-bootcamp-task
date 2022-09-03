@@ -8,14 +8,16 @@ import {useNavigate} from "react-router-dom"
 import SessionStorage from './SessionStorage';
 import './LaptopInfo.css'
 
-function LaptopInfo() {
+function LaptopInfo(props) {
 
+  const [validEverything, setValidEverything] = useState(false);
   const [brands, setBrands] = useState([]);
   const [cpus, setCpus] = useState([]);
   const [brandsSelect, setBrandsSelect] = SessionStorage('brandsSelect', 'DEFAULT');
   const [cpusSelect, setCpusSelect] = SessionStorage('cpusSelect', 'DEFAULT');
-  const [fileUrls, setfileUrls] = useState([]);
+  const [fileUrls, setfileUrls] = useState('');
   const [fileNames, setFileNames] = useState([]);
+  const [fileTargetValues, setFileTargetValues] =useState('');
   const [fileSize, setFileSize] = useState([]);
   const [laptopName, setLaptopName] = SessionStorage('laptopName', '');
   const [cpuCore, setCpuCore] = SessionStorage('cpuCore', '');
@@ -67,6 +69,7 @@ function LaptopInfo() {
         setFileNames(acceptedFiles.map(file => file.name));
         setFileSize(acceptedFiles.map(file => file.size));
         setValidImage(true);
+        setFileTargetValues(acceptedFiles[0]);
       }
     });
 
@@ -187,7 +190,7 @@ const validateCpuSelect = (checkText) => {
   }
 }
 const validateMemoryType = (checkText) => {
-  if(checkText === 'SSD' || checkText === 'HDD'){
+  if(checkText === 'SSD' || checkText === 'HDD'){ 
     setValidMemoryType(true);
     setMemoryTypeError('true');
   }else{
@@ -197,7 +200,7 @@ const validateMemoryType = (checkText) => {
 }
 
 const validateCondition = (checkText) => {
-  if(checkText === 'new' || checkText === 'secondary'){
+  if(checkText === 'new' || checkText === 'used'){
     setValidCondition(true);
     setLaptopConditionError('true');
   }else{
@@ -217,19 +220,27 @@ const nextPage = () => {
   validateMemoryType(memoryType);
   validatePrice(price);
   validateCondition(condition);
+  setValidEverything(!validEverything);
+  props.setimage(fileTargetValues);
 }
 
 const prevPage = () => {
   navigate('/personalInfo');
 }
 
-useEffect(() =>{
-  if(validImage && validLaptopName && validLaptopBrand && validLaptopCpu
-    && validCpuCore && validCpuThread && validMemoryCapacity && validMemoryType && validLaptopPrice && validCondition){
-    navigate('/submitPage');
+const checkError = () => {
+  if(validImage && validLaptopName && validLaptopBrand && validLaptopCpu && validCpuCore
+     && validCpuThread && validMemoryCapacity && validMemoryType && validLaptopPrice && validCondition) {
+      navigate('/submitPage');
   }
-}, [validImage, validLaptopName, validLaptopBrand, validLaptopCpu, validCpuThread,
-    validMemoryCapacity, validMemoryType, validCpuCore, validLaptopPrice, validCondition, navigate])
+}   
+
+useEffect(() =>{
+  checkError();
+}, [validEverything])
+
+
+
 
   return (
     <div className="laptopInfo">
@@ -241,8 +252,8 @@ useEffect(() =>{
         </Link>
       </div>
       <div className='laptopInfo-headers'>
-        <p className='header-1'>თანამშრომლის ინფო</p>
-        <p className='header-2'><span className='header-2-span'>ლეპტოპის მახასიათებლები</span></p>
+        <p className='header-1' onClick={() => prevPage()}>თანამშრომლის ინფო</p>
+        <p className='header-2'><span className='header-2-span' >ლეპტოპის მახასიათებლები</span></p>
       </div>
       <div className='laptopInfo-box'>
         <div className='laptopInfo-survey'>
@@ -251,7 +262,7 @@ useEffect(() =>{
                       style={{display : fileUrls.length>0 ? 'none' : '', 
                               border : photoError === 'notUploaded' ? '2px #E52F2F dashed' : '',
                               backgroundColor: photoError === 'notUploaded' ? '#F7E2E2' : ''}}>
-                  <input {...getInputProps()} />
+                  <input {...getInputProps()} id='image-input'/>
                   <div className='error-sign' style={{display: photoError === 'notUploaded' ? '' : 'none'}}>
                     <FontAwesomeIcon icon={faCircleExclamation} color='#C9CB52'/>
                   </div>
@@ -305,7 +316,7 @@ useEffect(() =>{
                   <option value="DEFAULT" disabled selected>ლეპტოპის ბრენდი</option>
                     {brands.map(item => (
                     <option
-                    value={item.name}
+                    value={item.id}
                     >
                     {item.name}
                     </option>
@@ -414,10 +425,10 @@ useEffect(() =>{
                       className='laptop-info-radios' checked={condition === 'new' ? 'true' : ''}/>
                 <label for='new'>ახალი</label>
               </div>
-              <div className='secondary'>
-                <input type="radio" id="secondary" value="secondary" name='laptop-condition' 
-                      className='laptop-info-radios' checked={condition === 'secondary' ? 'true' : ''}/>
-                <label for='secondary'>მეორადი</label>
+              <div className='used'>
+                <input type="radio" id="used" value="used" name='laptop-condition' 
+                      className='laptop-info-radios' checked={condition === 'used' ? 'true' : ''}/>
+                <label for='used'>მეორადი</label>
               </div>
             </div>
           </div>
@@ -426,6 +437,9 @@ useEffect(() =>{
             <button onClick={() => nextPage()} className='next-page-btn'>დამახსოვრება</button>
           </div>
         </div>
+      </div>
+      <div className='redberry-logo'>
+            <img src='redberry-logo.png' alt='redberry-logo' className='redberry-img'/>
       </div>
     </div>
   
