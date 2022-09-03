@@ -14,6 +14,7 @@ const [name, setName] = SessionStorage('name', '');
 const [lastName, setlastName] = SessionStorage('lastName', '');
 const [teamsSelect, setTeamsSelect] = SessionStorage('teamsSelect', 'DEFAULT');
 const [positionsSelect, setPositionsSelect] = SessionStorage('positionsSelect', 'DEFAULT');
+const [filteredPositions, setFilteredPositions] = SessionStorage('filteredPositions', []);
 const [email, setEmail] = SessionStorage('email', '');
 const [phone, setPhone] = SessionStorage('phone', '');
 const [validPhone, setValidPhone] = useState(false);
@@ -116,7 +117,7 @@ const validatelastName = (checkText) => {
 }
 
 const validateEmail = (checkText) => {
-    const regexpEmail = /^[\w-.]+@redberry.ge/g;
+    const regexpEmail = /^[\w-.]+@redberry\.ge/g;
     if(checkText === email){
       if (regexpEmail.exec(checkText) !== null) {
         setValidEmail(true);
@@ -161,6 +162,15 @@ useEffect(() =>{
     checkError();
 }, [validEverything])
 
+const filterPositions = (value) => {
+        let newArray = positions.filter(function (el) {
+            return el.team_id === JSON.parse(value)
+        });
+        setFilteredPositions(newArray);
+        console.log(value);
+        console.log(newArray);
+}
+
 
   return (
     <div className='personalInfo'>
@@ -200,13 +210,13 @@ useEffect(() =>{
                 <div className='teams'>   
                     <select value={teamsSelect}
                             className='teams-select' id='teams-select' 
-                            onChange={e => setTeamsSelect(e.target.value)}
-                            onBlur={() => validateTeamsSelect(teamsSelect)}
+                            onChange={e => {setTeamsSelect(e.target.value); filterPositions(e.target.value)}}
+                            onBlur={() => {validateTeamsSelect(teamsSelect) }}
                             style={{border: teamsSelectError === 'false' ?'2px solid red' : ''}} >
                             <option value="DEFAULT" disabled selected>თიმი</option>
                             {teams.map(item => (
                             <option
-                            value={item.name}
+                            value={item.id}
                             >
                             {item.name}
                             </option>
@@ -219,9 +229,9 @@ useEffect(() =>{
                             onBlur={() => validatePositionsSelect(positionsSelect)}
                             style={{border: positionsSelectError === 'false' ? '2px solid red': ''}} >
                             <option value="DEFAULT" disabled selected>პოზიცია</option>
-                            {positions.map(item => (
+                            {filteredPositions.map(item => (
                             <option
-                            value={item.name}
+                            value={item.id}
                             >
                             {item.name}
                             </option>
