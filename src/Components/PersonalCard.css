@@ -1,0 +1,97 @@
+.PersonalCard{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100%;
+}
+
+.LaptopImage{
+    width: 380px;
+    height: 250px;
+}
+
+.LaptopInfoCard{
+    margin-top: 20px;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 800px;
+}
+
+.PersonalInfoCardKeys, .LaptopSpecsNameKey, .LaptopSpecsCpuKey, .LaptopConditionPriceKey{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.PersonalInfoCardValues, .LaptopSpecsNameValue, .LaptopSpecsCpuValue, .LaptopConditionPriceValue{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: space-between;
+    color: #797979;
+}
+
+.PersonalCardLaptopSpecs, .Condition-Price-time{
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+.imageAndPersonalInfo{
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+
+.PersonalInfoCardKeys > h3{
+    margin: 0;
+}
+
+.LaptopSpecsNameKey > h3{
+    margin: 0;
+}
+
+.LaptopConditionPriceKey > h3{
+    margin: 0;
+}
+
+.LaptopSpecsCpuKey > h3{
+    margin: 0;
+}
+
+.LaptopConditionPrice, .LaptopConditionTime{
+    display: flex;
+    gap: 40px;
+    width: 380px;
+}
+
+.PersonalInfoCard{
+    display: flex;
+    gap: 70px;
+    width: 380px;
+}
+
+.LaptopSpecsCpu{
+    display: flex;
+    gap: 60px;
+    width: 380px;
+}
+
+.LaptopSpecsName{
+    display: flex;
+    gap: 100px;
+    width: 380px;
+}
+
+.PersonalCardLaptopSpecs{
+    display: flex;
+}
+
+.LaptopSpecsName{
+    display: flex;
+}
+
