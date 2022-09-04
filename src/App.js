@@ -10,7 +10,6 @@ import {useState} from 'react'
 
 function App() {
 
-const [image, setimage] = useState('');
 
   return (
     <Router>
@@ -18,8 +17,8 @@ const [image, setimage] = useState('');
         <Routes>
             <Route exact path='/' element={<Landing />} />
             <Route path='/personalInfo' element={<PersonalInfo/>}/>
-            <Route path='/laptopInfo' element={<LaptopInfo setimage={setimage}/>}/>
-            <Route path='/submitPage' element={<SubmitPage image={image}/>}/>
+            <Route path='/laptopInfo' element={<LaptopInfo/>}/>
+            <Route path='/submitPage' element={<SubmitPage/>}/>
             <Route path='/laptopList' element={<LaptopList />}/>
             <Route path='/laptopList/:idNum' element={<PersonalCard />} />
         </Routes>
