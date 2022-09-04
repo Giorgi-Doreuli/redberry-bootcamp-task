@@ -15,8 +15,7 @@ function LaptopList() {
             axios.get('https://pcfy.redberryinternship.ge/api/laptops?token=73426823c5b4d01ed260155425fb5b64')
             .then(res => {
                 const persons = res.data;
-                setlaptopData(persons.data);
-                console.log(persons.data);
+                setlaptopData(persons.data)
               });
           }
 
