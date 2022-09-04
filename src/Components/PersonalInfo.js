@@ -173,7 +173,7 @@ const filterPositions = (value) => {
   return (
     <div className='personalInfo'>
         <div className='prev-page'>
-            <Link to='/'>
+            <Link to='/' onClick={() => sessionStorage.clear()}>
                 <div className='arrow-ellipse'>
                     <IoIosArrowBack />
                 </div>     
