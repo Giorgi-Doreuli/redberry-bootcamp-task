@@ -5,6 +5,7 @@ import PersonalInfo from './Components/PersonalInfo'
 import LaptopInfo from './Components/LaptopInfo';
 import SubmitPage from './Components/SubmitPage';
 import LaptopList from './Components/LaptopList';
+import PersonalCard from './Components/PersonalCard';
 import {useState} from 'react'
 
 function App() {
@@ -20,6 +21,7 @@ const [image, setimage] = useState('');
             <Route path='/laptopInfo' element={<LaptopInfo setimage={setimage}/>}/>
             <Route path='/submitPage' element={<SubmitPage image={image}/>}/>
             <Route path='/laptopList' element={<LaptopList />}/>
+            <Route path='/laptopList/:idNum' element={<PersonalCard />} />
         </Routes>
       </div>
     </Router>
