@@ -7,9 +7,13 @@ import { faLariSign, faCircleCheck, faCircleExclamation} from '@fortawesome/free
 import {useNavigate} from "react-router-dom"
 import SessionStorage from './SessionStorage';
 import './LaptopInfo.css'
+import SubmitPage from './SubmitPage'
+import axios from 'axios';
 
 function LaptopInfo(props) {
 
+  const [image, setImage] = useState('');
+  const [success, setSuccess] = useState(false);
   const [validEverything, setValidEverything] = useState(false);
   const [brands, setBrands] = useState([]);
   const [cpus, setCpus] = useState([]);
@@ -53,6 +57,44 @@ function LaptopInfo(props) {
   const [priceError, setPriceError] = useState('true');
   const [laptopConditionError, setLaptopConditionError] = useState('true');
   const navigate = useNavigate();
+
+const postData = () => {
+  const formData = new FormData();
+  formData.append("name", JSON.parse(sessionStorage.getItem("name")));
+  formData.append('surname', JSON.parse(sessionStorage.getItem("lastName")));
+  formData.append("team_id", JSON.parse(sessionStorage.getItem("teamsSelect")));
+  formData.append("position_id", JSON.parse(sessionStorage.getItem("positionsSelect")));
+  formData.append("phone_number", JSON.parse(sessionStorage.getItem("phone").split(' ').join('')));
+  formData.append("email", JSON.parse(sessionStorage.getItem("email")));
+  formData.append("laptop_image", fileTargetValues);
+  formData.append("laptop_name", JSON.parse(sessionStorage.getItem('laptopName')));
+  formData.append("laptop_brand_id", JSON.parse(sessionStorage.getItem('brandsSelect')));
+  formData.append("laptop_cpu", JSON.parse(sessionStorage.getItem('cpusSelect')));
+  formData.append("laptop_cpu_cores", JSON.parse(sessionStorage.getItem('cpuCore')));
+  formData.append("laptop_cpu_threads", JSON.parse(sessionStorage.getItem('cpuThread')));
+  formData.append("laptop_ram", JSON.parse(sessionStorage.getItem('memoryCapacity')));
+  formData.append("laptop_hard_drive_type", JSON.parse(sessionStorage.getItem('memoryType')));
+  formData.append("laptop_state",  JSON.parse(sessionStorage.getItem('condition')));
+  formData.append("laptop_purchase_date", JSON.parse(sessionStorage.getItem('time')));
+  formData.append("laptop_price", JSON.parse(sessionStorage.getItem('price')));
+  formData.append("token", "73426823c5b4d01ed260155425fb5b64");
+  const config = {     
+    headers: { 'content-type': 'multipart/form-data' }
+}
+
+
+  axios.post('https://pcfy.redberryinternship.ge/api/laptop/create', formData, config)
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
+
+const clearSessionStorage = () =>{
+  sessionStorage.clear();
+}
 
     const {getRootProps, getInputProps, open} = useDropzone({
 
@@ -221,7 +263,6 @@ const nextPage = () => {
   validatePrice(price);
   validateCondition(condition);
   setValidEverything(!validEverything);
-  props.setimage(fileTargetValues);
 }
 
 const prevPage = () => {
@@ -231,7 +272,9 @@ const prevPage = () => {
 const checkError = () => {
   if(validImage && validLaptopName && validLaptopBrand && validLaptopCpu && validCpuCore
      && validCpuThread && validMemoryCapacity && validMemoryType && validLaptopPrice && validCondition) {
-      navigate('/submitPage');
+      setSuccess(true);
+      postData();
+      clearSessionStorage();
   }
 }   
 
@@ -243,7 +286,7 @@ useEffect(() =>{
 
 
   return (
-    <div className="laptopInfo">
+    <div className="laptopInfo" style={{position: success ? 'fixed' : ''}}>
       <div className='prev-page'>
         <Link to='/personalInfo'>
           <div className='arrow-ellipse'>
@@ -441,6 +484,7 @@ useEffect(() =>{
       <div className='redberry-logo'>
             <img src='redberry-logo.png' alt='redberry-logo' className='redberry-img'/>
       </div>
+      {success && <SubmitPage />}
     </div>
   
   )
