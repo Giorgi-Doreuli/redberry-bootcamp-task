@@ -10,6 +10,7 @@ function SubmitPage() {
         <div className="frame">
           <img src='Frame.png' alt='frame' className='frame-img' />
         </div>
+        <h3>ჩანაწერი დამატებულია!</h3>
         <Link to='/laptopList' className='submit-info' >სიაში გადაყვანა</Link>
         <Link to='/' className='go-to-landing' >მთავარი</Link>
     </div>
