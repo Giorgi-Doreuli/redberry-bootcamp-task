@@ -6,8 +6,12 @@
 }
 
 .LaptopImage{
-    width: 380px;
-    height: 250px;
+    width: 460px;
+    height: 100%;
+}
+
+.personal-card-header{
+    margin: 0;
 }
 
 .LaptopInfoCard{
@@ -16,14 +20,15 @@
     display: flex;
     flex-direction: column;
     gap: 40px;
-    width: 800px;
+    width: 1000px;
 }
 
 .PersonalInfoCardKeys, .LaptopSpecsNameKey, .LaptopSpecsCpuKey, .LaptopConditionPriceKey{
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
     justify-content: space-between;
+    width: 250px;
 }
 
 .PersonalInfoCardValues, .LaptopSpecsNameValue, .LaptopSpecsCpuValue, .LaptopConditionPriceValue{
@@ -36,14 +41,16 @@
 
 .PersonalCardLaptopSpecs, .Condition-Price-time{
     display: flex;
-    gap: 40px;
     align-items: flex-start;
+    gap: 50px;
+    padding: 10px;
 }
 
 .imageAndPersonalInfo{
     display: flex;
-    gap: 40px;
     align-items: center;
+    gap: 50px;
+    padding: 10px;
 }
 
 
@@ -63,28 +70,29 @@
     margin: 0;
 }
 
-.LaptopConditionPrice, .LaptopConditionTime{
+.LaptopConditionPrice{
     display: flex;
-    gap: 40px;
-    width: 380px;
+    width: 100%;
+}
+
+.LaptopConditionTime{
+    display: flex;
+    width: 100%;
 }
 
 .PersonalInfoCard{
     display: flex;
-    gap: 70px;
-    width: 380px;
+    width: 100%;
 }
 
 .LaptopSpecsCpu{
     display: flex;
-    gap: 60px;
-    width: 380px;
+    width: 100%;
 }
 
 .LaptopSpecsName{
     display: flex;
-    gap: 100px;
-    width: 380px;
+    width: 100%;
 }
 
 .PersonalCardLaptopSpecs{
@@ -93,5 +101,53 @@
 
 .LaptopSpecsName{
     display: flex;
+}
+
+.condition-small-device-h3{
+    display: none;
+}
+
+
+@media (min-height: 844px) and (min-width: 390px) {
+    .arrow-ellipse{
+        position: relative;
+        top: 30px;
+    }
+
+    .imageAndPersonalInfo, .PersonalCardLaptopSpecs, .Condition-Price-time{
+        flex-direction: column;
+    }
+
+    .PersonalCardLaptopSpecs{
+        gap: 20px;
+    }
+
+    .PersonalInfoCardKeys, .LaptopSpecsNameKey, .LaptopSpecsCpuKey, .LaptopConditionPriceKey{
+        width: 160px;
+    }
+
+    .LaptopInfoCard{
+        width: 100%;
+    }
+
+    .PersonalInfoCard{
+        width: 100%;
+    }
+
+    .LaptopImage{
+        width: 90%;
+    }
+
+    .condition-small-device-h3{
+        display: inline;
+    }
+
+    .condition-h3{
+        display: none;
+    }
+
+    .PersonalInfoCardKeys, .LaptopSpecsNameKey, .LaptopSpecsCpuKey, .LaptopConditionPriceKey{
+        font-size: 14px;
+    }
 }
 
