@@ -14,10 +14,19 @@
     gap: 20px;
 }
 
-.header-2-span{
+.laptop-header-1, .laptop-header-2{
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.laptop-header-2-span{
     display: inline-block;
     border-bottom: 2px solid black;
     padding-bottom: 10px;
+}
+
+.laptop-header-2-page{
+    display: none;
 }
 
 .laptopInfo-box{
@@ -49,6 +58,11 @@
     border: 2px #8AC0E2 dashed;
     border-radius: 8px;
     gap: 35px;
+    position: relative;
+}
+
+.choose-file-small-device{
+    display: none;
 }
 
 .image{
@@ -68,10 +82,20 @@
     align-items: center;
 }
 
+.image-info-icon{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 .image-info{
     display: flex;
     align-items: center;
     gap: 10px;
+}
+
+.camera-icon{
+    display: none;
 }
 
 .upload-text{
@@ -83,7 +107,11 @@
     font-weight: 700;
 }
 
-.upload-btn{
+.upload-text-small-device{
+    display: none;
+}
+
+.upload-btn, .upload-again-btn{
     text-decoration: none;
     display: flex;
     justify-content: center;
@@ -93,6 +121,7 @@
     padding: 18px 60px 18px 60px;
     border: none;
     cursor: pointer;
+    width: 250px;
 }
 
 .error-sign{
@@ -116,13 +145,17 @@
 }
 
 
-.upload-again-btn{
+.upload-again-div{
     display: flex;
     flex-direction: column;
     width: 100%;
     height: 100%;
     align-items: center;
     gap: 20px;
+}
+
+.laptop-image{
+    height: auto;
 }
 
 .laptop-name-brand{
@@ -141,6 +174,7 @@
     flex-direction: column;
     gap: 5px;
     flex: 1 0 20%;
+    width: 100%;
 }
 
 .laptop-info-input{
@@ -168,6 +202,7 @@
     flex-direction: column;
     gap: 5px;
     flex: 1 0 20%;
+    width: 100%;
 }
 
 .line{
@@ -186,6 +221,7 @@
     flex-direction: column;
     gap: 5px;
     flex: 1 0 40%;
+    width: 100%;
 }
 
 .memory-error-sign, .condition-error-sign{
@@ -279,5 +315,113 @@ input[type="radio"]:checked {
 .prev-page-btn{
     color: #62A1EB;
     cursor: pointer;
+}
+
+@media (min-height: 844px) and (min-width: 390px) {
+    .laptop-header-1{
+        display: none;
+    }
+
+    .laptop-header-2-span{
+        border: none;
+    }
+
+    .laptop-header-2-page{
+        display: inline;
+    }
+
+    .laptop-header-2-div{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .laptopInfo-headers{
+        padding-bottom: 25px;
+    }
+
+    .laptopInfo{
+        gap: 0;
+    }
+
+    .arrow-ellipse{
+        background-color: #EBEBEB;
+        position: relative;
+        top: 23px;
+    }
+
+    .laptopInfo-box{
+        width: 100%;
+    }
+
+    .laptopInfo-survey{
+        min-width: 90%;
+    }
+
+    .choose-file{
+        width: 100%;
+        height: 244px;
+    }
+
+    .upload-btn{
+        display: none;
+    }
+
+    .choose-file-small-device{
+        display: inline;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+
+    .upload-text-small-device{
+        display: inline;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        color: #4386A9;
+        font-weight: 700;
+    }
+
+    .upload-text{
+        display: none;
+    }
+
+    .camera-icon{
+        display: inline;
+        scale: 2;
+    }
+    
+    .error-sign{
+        scale: 2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .image{
+        height: 244px;
+    }
+
+    .upload-again-btn{
+        padding: 12px 22px;
+    }
+
+    .image-info-btn{
+        max-width: 100%;
+        gap: 5px;
+    }
+
+    .image-info{
+        flex-direction: column;
+        font-size: 10px;
+    }
+
+    .laptop-name-brand, .memory-specs, .cpu-specs, .laptop-time-price{
+        flex-direction: column;
+    }
+
 }
 
