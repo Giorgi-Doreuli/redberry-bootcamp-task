@@ -30,12 +30,16 @@ p{
     left: 30px;
 }
 
-.header-1, .header-2{
+.personal-header-1, .personal-header-2{
     font-weight: 700;
     cursor: pointer;
 }
 
-.header-1-span{
+.personal-header-1-page{
+    display: none;
+}
+
+.personal-header-1-span{
     display: inline-block;
     border-bottom: 2px solid black;
     padding-bottom: 10px;
@@ -60,7 +64,7 @@ p{
     padding-bottom: 40px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 40px;
 }
 
 .name, .lastName{
@@ -106,6 +110,7 @@ input{
     font-weight: 700;
 }
 
+
 select:focus{
     outline: none;
 }
@@ -141,4 +146,65 @@ select:focus{
     height: 20px;
     font-weight: lighter;
     font-size: 12px;
+    color: #2E2E2E;
+}
+
+@media (min-height: 844px) and (min-width: 390px) {
+    .personal-header-2{
+        display: none;
+    }
+
+    .personal-header-1-span{
+        border: none;
+    }
+
+    .personal-header-1-page{
+        display: inline;
+    }
+
+    .personal-header-1-div{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .personalInfo-headers{
+        padding-bottom: 25px;
+    }
+
+    .arrow-ellipse{
+        background-color: #EBEBEB;
+        position: relative;
+        top: 23px;
+    }
+
+    .personalInfo-box{
+        width: 100%;
+    }
+
+    .prev-page{
+        height: 31px;
+    }
+
+    .personalInfo{
+        gap: 0;
+    }
+
+    .redberry-logo{
+        display: none;
+    }
+
+    .name-lastName{
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .personalInfo-survey{
+        padding-top: 40px;
+        padding-bottom: 60px;
+        min-height: 100%;
+    }
+
+
 }
