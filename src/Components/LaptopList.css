@@ -6,6 +6,11 @@
     flex-direction: column;
     align-items: center;
     gap: 25px;
+    padding-bottom: 40px;
+}
+
+.list-header{
+    margin: 0;
 }
 
 .list{
@@ -17,4 +22,32 @@
 
 .list>* {
     flex: 0 1 550px;
+}
+
+@media (min-height: 844px) and (min-width: 390px) {
+    
+    .LaptopList{
+        gap: 0;
+    }
+
+    .arrow-ellipse{
+        background-color: #fff;
+        position: relative;
+        top: 28px;
+    }
+
+    .list-header{
+        margin: 0;
+        padding-bottom: 25px;
+    }
+
+    .list{
+        width: 90%;
+    }
+
+    .list>*{
+        flex: 0 1 350px;
+        justify-content: center;
+        align-items: center;
+    }
 }
