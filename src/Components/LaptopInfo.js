@@ -3,16 +3,15 @@ import {Link} from 'react-router-dom'
 import {IoIosArrowBack} from 'react-icons/io'
 import {useDropzone} from 'react-dropzone';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLariSign, faCircleCheck, faCircleExclamation} from '@fortawesome/free-solid-svg-icons';
+import { faLariSign, faCircleCheck, faCircleExclamation, faCamera} from '@fortawesome/free-solid-svg-icons';
 import {useNavigate} from "react-router-dom"
 import SessionStorage from './SessionStorage';
 import './LaptopInfo.css'
 import SubmitPage from './SubmitPage'
 import axios from 'axios';
 
-function LaptopInfo(props) {
+function LaptopInfo() {
 
-  const [image, setImage] = useState('');
   const [success, setSuccess] = useState(false);
   const [validEverything, setValidEverything] = useState(false);
   const [brands, setBrands] = useState([]);
@@ -77,7 +76,7 @@ const postData = () => {
   formData.append("laptop_state",  JSON.parse(sessionStorage.getItem('condition')));
   formData.append("laptop_purchase_date", JSON.parse(sessionStorage.getItem('time')));
   formData.append("laptop_price", JSON.parse(sessionStorage.getItem('price')));
-  formData.append("token", "73426823c5b4d01ed260155425fb5b64");
+  formData.append("token", "4f18fd700fefc88ae6c9066fe7ab08d2");
   const config = {     
     headers: { 'content-type': 'multipart/form-data' }
 }
@@ -295,8 +294,13 @@ useEffect(() =>{
         </Link>
       </div>
       <div className='laptopInfo-headers'>
-        <p className='header-1' onClick={() => prevPage()}>თანამშრომლის ინფო</p>
-        <p className='header-2'><span className='header-2-span' >ლეპტოპის მახასიათებლები</span></p>
+          <div className='laptop-header-1-div'>
+            <p className='laptop-header-1' onClick={() => prevPage()}>თანამშრომლის ინფო</p>
+          </div>
+          <div className='laptop-header-2-div'>
+            <p className='laptop-header-2'><span className='laptop-header-2-span' >ლეპტოპის მახასიათებლები</span></p>
+            <p className='laptop-header-2-page'>2/2</p>
+          </div>
       </div>
       <div className='laptopInfo-box'>
         <div className='laptopInfo-survey'>
@@ -305,7 +309,15 @@ useEffect(() =>{
                       style={{display : fileUrls.length>0 ? 'none' : '', 
                               border : photoError === 'notUploaded' ? '2px #E52F2F dashed' : '',
                               backgroundColor: photoError === 'notUploaded' ? '#F7E2E2' : ''}}>
+                  <div className='choose-file-small-device' onClick={open}></div>
                   <input {...getInputProps()} id='image-input'/>
+                  <div className='camera-icon'>
+                    <FontAwesomeIcon icon={faCamera} color='#79C6EE'/>
+                  </div>
+                  <div className='upload-text-small-device' style={{color: photoError === 'notUploaded' ? '#E52F2F' : ''}}>
+                    <p>ლეპტოპის ფოტოს</p>
+                    <p>ატვირთვა</p>
+                  </div>
                   <div className='error-sign' style={{display: photoError === 'notUploaded' ? '' : 'none'}}>
                     <FontAwesomeIcon icon={faCircleExclamation} color='#C9CB52'/>
                   </div>
@@ -320,19 +332,21 @@ useEffect(() =>{
                 <div className='image' style={{display : fileUrls.length<1 ? 'none' : ''}}>                  
                   {fileUrls.length > 0 ?                  
                     <div className='image-layer'>{fileUrls.map((file) => (
-                      <div className='upload-again-btn'>
+                      <div className='upload-again-div'>
                         <img src={file.preview} alt='preview' className='uploaded-image'/>
                         <div className='image-info-btn'>
-                          <div className='image-info'>
+                          <div className='image-info-icon'>
                             <FontAwesomeIcon icon={faCircleCheck} color='#BED918'/>
-                            {fileNames.map(fileName => (
-                              <p>{fileName},</p> 
-                            ))}
-                            {fileSize.map(fileSize => (
-                              <p>{parseInt(fileSize/100000)} MB</p> 
-                            ))}
+                            <div className='image-info'>
+                              {fileNames.map(fileName => (
+                                <p>{fileName},</p> 
+                              ))}
+                              {fileSize.map(fileSize => (
+                                <p>{parseInt(fileSize/100000)} MB</p> 
+                              ))}
+                            </div>
                           </div>
-                          <button type="button" onClick={open} className='upload-btn'>
+                          <button type="button" onClick={open} className='upload-again-btn'>
                             თავიდან ატვირთე 
                           </button>
                         </div>
