@@ -149,7 +149,7 @@ select:focus{
     color: #2E2E2E;
 }
 
-@media (min-height: 844px) and (min-width: 390px) {
+@media (max-height: 845px) and (max-width: 391px) {
     .personal-header-2{
         display: none;
     }

@@ -45,7 +45,7 @@
     cursor: pointer;
 }
 
-@media (min-height: 844px) and (min-width: 390px) {
+@media (max-height: 845px) and (max-width: 391px) {
     .cardImg{
         width: 164px;
         height: 108px;
