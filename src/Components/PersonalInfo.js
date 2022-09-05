@@ -180,8 +180,13 @@ const filterPositions = (value) => {
             </Link>
         </div>
         <div className='personalInfo-headers'>
-            <p className='header-1'><span className='header-1-span'>თანამშრომლის ინფო</span></p>
-            <p className='header-2' onClick={() => nextPage()}>ლეპტოპის მახასიათებლები</p>
+            <div className='personal-header-1-div'>
+                <p className='personal-header-1'><span className='personal-header-1-span'>თანამშრომლის ინფო</span></p>
+                <p className='personal-header-1-page'>1/2</p>
+            </div>
+            <div className='personal-header-2-div'>
+                <p className='personal-header-2' onClick={() => nextPage()}>ლეპტოპის მახასიათებლები</p>
+            </div>
         </div>
         <div className='personalInfo-box'>
             <div className='personalInfo-survey'>
@@ -225,7 +230,10 @@ const filterPositions = (value) => {
                     <select value={positionsSelect} className='positions-select'
                             onChange={e => setPositionsSelect(e.target.value)}
                             onBlur={() => validatePositionsSelect(positionsSelect)}
-                            style={{border: positionsSelectError === 'false' ? '2px solid red': ''}} >
+                            style={{border: positionsSelectError === 'false' ? '2px solid red': '', 
+                            cursor: teamsSelect !== "DEFAULT" ? "" : 'not-allowed'}}
+                            disabled={teamsSelect !== 'DEFAULT' ? false : true}
+                            >
                             <option value="DEFAULT" disabled selected>პოზიცია</option>
                             {filteredPositions.map(item => (
                             <option
