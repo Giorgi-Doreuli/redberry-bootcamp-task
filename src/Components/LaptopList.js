@@ -28,7 +28,7 @@ function LaptopList() {
         <div className='prev-page'>
             <Link to='/'>
             <div className='arrow-ellipse'>
-                <IoIosArrowBack />
+                <IoIosArrowBack  />
             </div>     
             </Link>
       </div>
