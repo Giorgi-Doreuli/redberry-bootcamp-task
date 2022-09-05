@@ -342,7 +342,7 @@ useEffect(() =>{
                                 <p>{fileName},</p> 
                               ))}
                               {fileSize.map(fileSize => (
-                                <p>{parseInt(fileSize/100000)} MB</p> 
+                                <p>{parseInt(fileSize/10000)/10} MB</p> 
                               ))}
                             </div>
                           </div>
