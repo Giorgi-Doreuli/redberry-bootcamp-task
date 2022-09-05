@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useEffect} from 'react'
 import { useParams } from 'react-router-dom'
 import './PersonalCard.css'
 import axios from 'axios';
@@ -15,7 +15,7 @@ function PersonalCard() {
 
     useEffect(() =>{
         const getData = () => {
-            axios.get(`https://pcfy.redberryinternship.ge/api/laptop/${idNum}?token=73426823c5b4d01ed260155425fb5b64`)
+            axios.get(`https://pcfy.redberryinternship.ge/api/laptop/${idNum}?token=4f18fd700fefc88ae6c9066fe7ab08d2`)
             .then(res => {
                 const persons = res.data;
                 setlaptopInfo(persons.data);
@@ -40,7 +40,7 @@ function PersonalCard() {
         getPositions();
         getBrands();
         getData();
-    }, [idNum, setlaptopInfo, setPositions])
+    }, [idNum, setlaptopInfo, setPositions, setBrands])
 
   return (
     <div className='PersonalCard'>
@@ -51,7 +51,7 @@ function PersonalCard() {
                 </div>     
             </Link>
         </div>
-        <h2>ლეპტოპის ინფო</h2>
+        <h2 className='personal-card-header'>ლეპტოპის ინფო</h2>
             {LaptopInfo && positions && brands ?
             <div className='LaptopInfoCard'>
                 <div className='imageAndPersonalInfo'>
@@ -69,7 +69,7 @@ function PersonalCard() {
                             <p>{LaptopInfo.user.name}</p>
                             <p>{LaptopInfo.user.surname}</p>
                             <p>{positions.find(x => x.id === LaptopInfo.user.position_id).name}</p>
-                            <p>{LaptopInfo.user.email}</p>
+                            <p className='personalCardEmail'>{LaptopInfo.user.email}</p>
                             <p>{LaptopInfo.user.phone_number.replace(/(\d{3})(\d{3})(\d{2})(\d{2})(\d{2})/, '$1 $2 $3 $4 $5')}</p>
                         </div>
                     </div>
@@ -107,7 +107,8 @@ function PersonalCard() {
                 <div className='Condition-Price-time'>
                     <div className='LaptopConditionPrice'>
                         <div className='LaptopConditionPriceKey'>
-                            <h3>ლეპტოპის მდგომარეობა:</h3>
+                            <h3 className='condition-h3'>ლეპტოპის მდგომარეობა:</h3>
+                            <h3 className='condition-small-device-h3'>მდგომარეობა:</h3>
                             <h3>ლეპტოპის ფასი:</h3>
                         </div>
                         <div className='LaptopConditionPriceValue'>
@@ -117,7 +118,7 @@ function PersonalCard() {
                     </div>
                     <div className='LaptopConditionTime'>
                         <div className='LaptopConditionPriceKey'>
-                           <h3>შეძენის თარითი:</h3>
+                           <h3>შეძენის თარიღი:</h3>
                         </div>
                         <div className='LaptopConditionPriceValue'>
                             <p>{LaptopInfo.laptop.purchase_date}</p>
