@@ -12,7 +12,7 @@ function LaptopList() {
 
     useEffect(() =>{
         const getData = () => {
-            axios.get('https://pcfy.redberryinternship.ge/api/laptops?token=73426823c5b4d01ed260155425fb5b64')
+            axios.get('https://pcfy.redberryinternship.ge/api/laptops?token=4f18fd700fefc88ae6c9066fe7ab08d2')
             .then(res => {
                 const persons = res.data;
                 setlaptopData(persons.data)
@@ -32,7 +32,7 @@ function LaptopList() {
             </div>     
             </Link>
       </div>
-        <h2>ჩანაწერების სია</h2>
+        <h2 className='list-header'>ჩანაწერების სია</h2>
         <div className='list'>
             {laptopData.map((item) => (
                 <div className='cardList'>
